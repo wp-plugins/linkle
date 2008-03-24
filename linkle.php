@@ -10,7 +10,7 @@ include_once 'LinkleOptions.php';
 
 function linkle_substitute($match){
 	global $linkle_options;
-	return $linkle_options->process_tag($match);
+	return '<span class="linkle_link" link_type="'.htmlentities($match[1]).'" link_term="'.$match[2].'" link_text="'.$match[4].'">'.$linkle_options->process_tag($match).'</span>';
 }
 
 $linkle_options = NULL;
