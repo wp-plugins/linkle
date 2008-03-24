@@ -1,6 +1,6 @@
 === linkle ===
 Contributors: Mike Lay, Michael Smit
-Tags: links, wikipedia, amazon
+Tags: links, wikipedia, amazon,gravatar,twitter
 Requires at least: 2.3.2
 Tested up to: 2.3.2
 Stable tag: 0.6
@@ -17,6 +17,15 @@ This plugin allows you to easily insert a wide variety of links into your wordpr
 [ln amazon]978-0321396853[text]Eclipse Web Tools Platform[/text][/ln]
 
 New link types can be easily added and existing links can be easily modified from the wordpress options page.
+
+The following types of links are currently supported by default (with more on the way):
+<ul>
+	<li>wikipedia</li>
+	<li>amazon</li>
+	<li>php</li>
+	<li>gravatar</li>
+	<li>twitter-rss</li>
+</ul>
 == Installation ==
 1. Unzip the linkle plugin zip file into you wp-content/plugins directory.
 2. Activate the plugin through the `Plugins` menu in WordPress.
