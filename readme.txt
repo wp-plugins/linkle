@@ -1,4 +1,4 @@
-=== Wp-Wikipedia-Excerpt ===
+=== linkle ===
 Contributors: Mike Lay, Michael Smit
 Tags: links, wikipedia, amazon
 Requires at least: 2.3.2
