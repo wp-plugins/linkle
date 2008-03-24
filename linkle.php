@@ -42,13 +42,41 @@ function unset_linkle_options() {
 function linkle_options() {
 	echo '<div class="wrap"><h2>Linkle Options</h2>';
 	if($_REQUEST['submit']) {
-		update_linkle_options();
+		linkle_update_options();
+	}
+	foreach(array_keys($_REQUEST) as $key){
+		if(ereg("^submit_([0-9]+)", $key, $match)){
+			echo '<div id="message" class="updated fade">';
+			echo '<p>Link Type Suggested. Thanks!</p>';
+			echo '</div>';
+			linkle_suggest_link($match[1], $_REQUEST);
+			return;
+		}
 	}
 	linkle_print_form();
 	echo '</div>';
 }
 
-function update_linkle_options() {
+function linkle_suggest_link($count, $map){
+	if(get_magic_quotes_gpc())
+		$map = array_map(stripslashes, $map);
+	$type = $map["linkle_handler_".$count."_type"];
+	$description = $map["linkle_handler_".$count."_description"];
+	$code = $map["linkle_handler_".$count."_code"];
+	$message = "<linkle_suggestion>\n";
+	$message = $message."<type>".$type."</type>\n";
+	$message = $message."<description>".$description."</description>\n";
+	$message = $message."<code><![CDATA[\n";
+	$message = $message.$code;
+	$message = $message."]]></code>\n";
+	$message = $message."</linkle_suggestion>";
+	//NO SPAM
+	$username = "linkle_sugestions";
+	$domain = "4thmouse.com";
+	mail($username."@".$domain, "Suggestion for type ".$type, $message);
+}
+
+function linkle_update_options() {
 	$options = LinkleOptions::build_from_request();
 	$options->store();
 	echo '<div id="message" class="updated fade">';
@@ -65,6 +93,9 @@ function linkle_print_handler_entry($key, $info, $count){
 <textarea cols="70" rows="1" name="linkle_handler_<?php echo $count?>_description"><?php echo htmlentities($info->get_description())?></textarea><br/>
 <label>Handler Code ($match, $text, $term)</label><br />
 <textarea name="linkle_handler_<?php echo $count?>_code" cols="70" rows="10"><?php echo htmlentities($info->get_code())?></textarea>
+<?php if(strcmp($info->get_code() ,"") != 0){?>
+<input type="submit" name="submit_<?php echo $count?>" value = "Suggest This Link Type to The Linkle Team!"/>
+<?php }?>
 </div>
 	<?php
 }
