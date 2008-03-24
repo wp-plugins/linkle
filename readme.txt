@@ -3,7 +3,7 @@ Contributors: Mike Lay, Michael Smit
 Tags: links, wikipedia, amazon
 Requires at least: 2.3.2
 Tested up to: 2.3.2
-Stable tag:none
+Stable tag: 0.6
 Easily embed links to wikipedia topics, amazon book sales, php documentation, and more with [ln linktype]topic[/ln].
 
 == Description ==
