@@ -6,25 +6,6 @@ Author: Michael Smit, Mike Lay
 Version: 0.6
 */
 
-//changelog
-//sort link types in editor
-//added description field (and added LinkleLinkInfo class to manage link type info)
-//added some more default links
-
-//old changlog
-//small modification in linkle.php for
-//use with linkle.js
-//sizeable changes to linkle.js
-
-//old changelog
-//small form modifications for javascript id hooks
-//in linkle.php
-//added linkle.js file for collapsing forms
-//no changes to LinkleOptions.php
-
-//old changelog
-//moved all the options stuff into a class called LinkleOptions
-
 include_once 'LinkleOptions.php';
 
 function linkle_substitute($match){
