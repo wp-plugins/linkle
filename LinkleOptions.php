@@ -72,6 +72,13 @@ class LinkleOptions{
 		$twitter_rss = LinkleLinkInfo::build("Link to a twitter rss feed.",
 			'return \'<a href="http://twitter.com/statuses/user_timeline.rss?id=\'.urlencode($term).\'">\'.$text.\'</a>\';');
 		$map["twitter-rss"] = $twitter_rss->get_storage_string();
+		$wppost = LinkleLinkInfo::build("Link to an article in your wordpress database by title",
+			'global $wpdb;'."\n".
+			'$set = $wpdb->get_row(\'SELECT ID FROM \'.$wpdb->posts.\' WHERE post_title = "\'.$term.\'"\');'."\n".
+			'if(empty($set))'."\n".
+    			'	return $match;'."\n".
+			'return \'<a href="\'.get_permalink($set->ID).\'">\'.$text.\'</a>\';');
+		$map["wppost"] = $wppost->get_storage_string();
 		add_option("linkle_handler_map", serialize($map), "serialized map of type to code for linkle");
 	}
 
