@@ -7,10 +7,12 @@ Version: 0.6
 */
 
 include_once 'LinkleOptions.php';
+include_once 'LinkleMatchInfo.php';
 
 function linkle_substitute($match){
+	$match_info = LinkleMatchInfo::build_from_match($match);
 	global $linkle_options;
-	return '<span class="linkle_link" link_type="'.htmlentities($match[1]).'" link_term="'.htmlentities($match[2]).'" link_text="'.htmlentities($match[4]).'">'.$linkle_options->process_tag($match).'</span>';
+	return '<span class="linkle_link" link_type="'.htmlentities($match_info->get_link_type()).'" link_term="'.htmlentities($match_info->get_link_term()).'" link_text="'.htmlentities($match_info->get_link_text()).'">'.$linkle_options->process_tag($match_info).'</span>';
 }
 
 $linkle_options = NULL;
@@ -18,7 +20,7 @@ function linkle($content){
 	global $linkle_options;
 	$linkle_options = LinkleOptions::build_from_options();
 	return preg_replace_callback(
-		"/\[ln +([^\]]+)\]([^\[]*)(\[text]([^\[]*)\[\/text\])?\[\/ln\]/",
+		LinkleMatchInfo::get_match_string(),
 		linkle_substitute,
 		$content);
 }
@@ -91,7 +93,7 @@ function linkle_print_handler_entry($key, $info, $count){
 <input type="text" name="linkle_handler_<?php echo $count?>_type" value="<?php echo htmlentities($key)?>"/><br />
 <label>Description</label>
 <textarea cols="70" rows="1" name="linkle_handler_<?php echo $count?>_description"><?php echo htmlentities($info->get_description())?></textarea><br/>
-<label>Handler Code ($match, $text, $term)</label><br />
+<label>Handler Code ($match, $text, $term, $properties)</label><br />
 <textarea name="linkle_handler_<?php echo $count?>_code" cols="70" rows="10"><?php echo htmlentities($info->get_code())?></textarea>
 <?php if(strcmp($info->get_code() ,"") != 0){?>
 <input type="submit" name="submit_<?php echo $count?>" value = "Suggest This Link Type to The Linkle Team!"/>

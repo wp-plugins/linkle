@@ -41,11 +41,11 @@ class LinkleLinkInfo{
 		return serialize(array($this->description, $this->code));
 	}
 
-	function execute($everything, $term, $link_text){
+	function execute($everything, $term, $link_text, $properties){
 		if($this->func == NULL)
-			$this->func = create_function('$wrapper, $term, $text', $this->code);
+			$this->func = create_function('$match, $term, $text, $properties', $this->code);
 		$func = $this->func;
-		return $func($everything, $term, $link_text);
+		return $func($everything, $term, $link_text, $properties);
 	}
 }
 
@@ -132,16 +132,13 @@ class LinkleOptions{
 
 	//public process a tag from a wordpress document
 	function process_tag($match){
-		$everything = $match[0];
-		$link_type = $match[1];
-		$term = $match[2];
-		$link_text = $match[4];
-		if(strcmp($link_text, "") == 0){
-			$link_text = $term;
-		}
+		$everything = $match->get_full_text();
+		$link_type = $match->get_link_type();
+		$term = $match->get_link_term();
+		$link_text = $match->get_link_text();
 
 		if(array_key_exists($link_type, $this->type_to_info_map)){
-			return $this->type_to_info_map[$link_type]->execute($everything, $term, $link_text);
+			return $this->type_to_info_map[$link_type]->execute($everything, $term, $link_text, $match->get_custom_properties_map());
 		}
 		return $everything;
 	}
