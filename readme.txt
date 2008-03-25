@@ -20,11 +20,12 @@ New link types can be easily added and existing links can be easily modified fro
 
 The following types of links are currently supported by default (with more on the way):
 <ul>
-	<li>wikipedia</li>
 	<li>amazon</li>
-	<li>php</li>
 	<li>gravatar</li>
+	<li>php</li>
 	<li>twitter-rss</li>
+	<li>wikipedia</li>
+	<li>wppost</li>
 </ul>
 == Installation ==
 1. Unzip the linkle plugin zip file into you wp-content/plugins directory.
