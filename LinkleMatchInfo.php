@@ -9,7 +9,7 @@ class LinkleMatchInfo{
 
 	//static
 	function get_match_string(){
-		return '/\[ln\s+(\w+)(\s+\w+\s*=\s*&#8221;.*&#8221;)*\s*\]([^\[]*)(\[text]([^\[]*)\[\/text\])?\[\/ln\]/';
+		return '/\[ln\s+([\w-_]+)(\s+[\w-_]+\s*=\s*&#8221;.*&#8221;)*\s*\]([^\[]*)(\[text]([^\[]*)\[\/text\])?\[\/ln\]/';
 	}
 
 	//static
