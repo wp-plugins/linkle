@@ -8,6 +8,7 @@ Version: 0.6
 
 include_once 'LinkleOptions.php';
 include_once 'LinkleMatchInfo.php';
+include_once 'tinymce/LinkleButton.php';
 
 function linkle_substitute($match){
 	$match_info = LinkleMatchInfo::build_from_match($match);

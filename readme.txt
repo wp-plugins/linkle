@@ -3,7 +3,7 @@ Contributors: Mike Lay, Michael Smit
 Tags: links, wikipedia, amazon,gravatar,twitter
 Requires at least: 2.3.2
 Tested up to: 2.3.2
-Stable tag: 0.6
+Stable tag: 0.7
 Easily embed links to wikipedia topics, amazon book sales, php documentation, and more with [ln linktype]topic[/ln].
 
 == Description ==
@@ -15,6 +15,8 @@ This plugin allows you to easily insert a wide variety of links into your wordpr
 [ln php]htmlentities[/ln]
 
 [ln amazon]978-0321396853[text]Eclipse Web Tools Platform[/text][/ln]
+
+Or you can add links by clicking the 'ln' button inside of the wysiwyg editor. This will bring up a dialog box where you enter in the necessary data for that particular link
 
 New link types can be easily added and existing links can be easily modified from the wordpress options page.
 

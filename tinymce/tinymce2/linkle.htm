@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<script language="javascript" type="text/javascript" src="../../../../../wp-includes/js/tinymce/tiny_mce_popup.js"></script>
+	<script language="javascript" type="text/javascript" src="../../../../../wp-includes/js/jquery/jquery.js"></script>
+	<script language="javascript" type="text/javascript">
+		function getSelect() {
+			jQuery.get('../LinkleTypes.php', buildSelect);
+		}
+		function buildSelect(types) {
+			var i = 0;
+			while(myEle = types.getElementsByTagName('name')[i]) {
+				var new_option = document.createElement('option');
+				new_option.appendChild( document.createTextNode( myEle.firstChild.nodeValue ) );
+				document.getElementById( 'linkle_type' ).appendChild( new_option );
+				i++;
+			}
+		}
+		function insertLink () {
+			var query = '[ln '+document.getElementById('linkle_type').value+']'+document.getElementById('linkle_keyword').value;
+			if(document.getElementById('linkle_text').value != '') query += '[text]'+document.getElementById('linkle_text').value+'[/text]';
+			query += '[/ln]';
+			jQuery.ajax({
+				url: '../LinkleLink.php',
+				data: {q: query},
+				type: 'GET',
+				dataType: 'xml',
+				async : false,
+				success: buildLink
+			});
+		}
+		function buildLink(mydata) {
+			var myText = mydata.getElementsByTagName('linklelink')[0].firstChild.nodeValue+'&#160;';
+			tinyMCE.execCommand( 'mceInsertContent', false, myText );
+			tinyMCE.execCommand( 'mceInsertContent', false, '&#160;' );
+			tinyMCEPopup.close();
+		}
+		function toggleFieldVisibility() {
+			if(document.getElementById('linkle_keyword').value == '') {
+				document.getElementById('linkle_text_label').style.visibility = 'hidden';
+				document.getElementById('linkle_text').style.visibility = 'hidden';
+				document.getElementById('insert').style.visibility = 'hidden';
+			} else {
+				document.getElementById('linkle_text_label').style.visibility = 'visible';
+				document.getElementById('linkle_text').style.visibility = 'visible';
+				document.getElementById('insert').style.visibility= 'visible';
+			}
+		}
+		function linkleInit() {
+			document.getElementById('cancel').onclick = tinyMCEPopup.close;
+			document.getElementById('insert').onclick = insertLink;
+			var i = 0;
+			while(ele = document.getElementsByTagName('input')[i]) {
+				ele.onfocus = function() { this.style.borderColor = "#555"; }
+				ele.onblur = function() { this.style.borderColor = "#b7b7b7"; }
+				i++;
+			} 
+			document.getElementById('linkle_keyword').focus();
+			getSelect();
+			toggleFieldVisibility();
+			document.getElementById('linkle_keyword').onkeyup = toggleFieldVisibility;
+		}
+		window.onload = linkleInit;
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/linkle.css" />
+	<base target="_self">
+</head>
+<body>
+<form onsubmit="return false;" action="#">
+<div id="wrapper">
+<label id="linkle_keyword_label">{$lang_linkle_keyword}</label>
+<input type="text" size="30" id="linkle_keyword" tabindex="1">
+<label id="linkle_text_label">{$lang_linkle_link_text}</label>
+<input type="text" size="30" name="text" id="linkle_text" tabindex="2">
+<label>{$lang_linkle_type}</label>
+<select id="linkle_type" name="type" tabindex="3">
+</select>
+</div>
+<div>
+<div style="float: left">
+<input type="button" id="cancel" name="cancel" value="cancel" tabindex="5">
+</div>
+<div style="float : right">
+<input type="button" id="insert" name="insert" value="insert" tabindex="4">
+</div>
+</div>
+
+</form>
+</body>
+</html>

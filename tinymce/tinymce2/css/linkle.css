@@ -1,0 +1,9 @@
+label {
+	display : block;
+	text-indent : 1em;
+	font-size : smaller;
+}
+#wrapper {
+	clear : both;
+	padding : 5px;
+}
