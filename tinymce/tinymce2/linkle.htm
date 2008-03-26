@@ -11,9 +11,6 @@
 			while(myEle = types.getElementsByTagName('name')[i]) {
 				var myOpt = new Option( myEle.firstChild.nodeValue, myEle.firstChild.nodeValue);
 				document.getElementById('linkle_type').options[i] = myOpt;
-				//var new_option = document.createElement('option');
-				//new_option.appendChild( document.createTextNode( myEle.firstChild.nodeValue ) );
-				//document.getElementById( 'linkle_type' ).appendChild( new_option );
 				i++;
 			}
 		}
@@ -27,14 +24,13 @@
 				type: 'GET',
 				dataType: 'xml',
 				async : false,
-				success: buildLink,
-				complete: tinyMCEPopup.close
+				success: buildLink
 			});
 		}
 		function buildLink(mydata) {
 			var myText = mydata.getElementsByTagName('linklelink')[0].firstChild.nodeValue+'&#160;';
+			tinyMCEPopup.close();//make sure to close popup before inserting text!!!
 			tinyMCE.execInstanceCommand( 'mce_editor_0', 'mceInsertContent', false, myText );
-			tinyMCE.execInstanceCommand( 'mce_editor_0', 'mceInsertContent', false, '&#160;' );
 		}
 		function toggleFieldVisibility() {
 			if(document.getElementById('linkle_keyword').value == '') {
