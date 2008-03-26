@@ -36,7 +36,7 @@ var TinyMCE_LinklePlugin = {
 				dialog['file']='../../../../../wp-content/plugins/linkle/tinymce/tinymce2/linkle.htm';
 				dialog['width'] = 250;
 				dialog['height'] = 165;
-				tinyMCE.openWindow( dialog, {editor_id : tinyMCE.getWindowArg('editor_id'), inline : "yes", resizable : "yes" });
+				tinyMCE.openWindow( dialog, {editor_id : tinyMCE.getWindowArg('editor_id'), inline : "yes", resizable : "yes", mce_replacevariables : false });
 				return true;
 		}
 		return false;

@@ -9,9 +9,11 @@
 		function buildSelect(types) {
 			var i = 0;
 			while(myEle = types.getElementsByTagName('name')[i]) {
-				var new_option = document.createElement('option');
-				new_option.appendChild( document.createTextNode( myEle.firstChild.nodeValue ) );
-				document.getElementById( 'linkle_type' ).appendChild( new_option );
+				var myOpt = new Option( myEle.firstChild.nodeValue, myEle.firstChild.nodeValue);
+				document.getElementById('linkle_type').options[i] = myOpt;
+				//var new_option = document.createElement('option');
+				//new_option.appendChild( document.createTextNode( myEle.firstChild.nodeValue ) );
+				//document.getElementById( 'linkle_type' ).appendChild( new_option );
 				i++;
 			}
 		}
@@ -25,14 +27,14 @@
 				type: 'GET',
 				dataType: 'xml',
 				async : false,
-				success: buildLink
+				success: buildLink,
+				complete: tinyMCEPopup.close
 			});
 		}
 		function buildLink(mydata) {
 			var myText = mydata.getElementsByTagName('linklelink')[0].firstChild.nodeValue+'&#160;';
-			tinyMCE.execCommand( 'mceInsertContent', false, myText );
-			tinyMCE.execCommand( 'mceInsertContent', false, '&#160;' );
-			tinyMCEPopup.close();
+			tinyMCE.execInstanceCommand( 'mce_editor_0', 'mceInsertContent', false, myText );
+			tinyMCE.execInstanceCommand( 'mce_editor_0', 'mceInsertContent', false, '&#160;' );
 		}
 		function toggleFieldVisibility() {
 			if(document.getElementById('linkle_keyword').value == '') {
@@ -67,11 +69,11 @@
 <body>
 <form onsubmit="return false;" action="#">
 <div id="wrapper">
-<label id="linkle_keyword_label">{$lang_linkle_keyword}</label>
+<label id="linkle_keyword_label">Keyword or Data</label>
 <input type="text" size="30" id="linkle_keyword" tabindex="1">
-<label id="linkle_text_label">{$lang_linkle_link_text}</label>
+<label id="linkle_text_label">Displayed Link Text</label>
 <input type="text" size="30" name="text" id="linkle_text" tabindex="2">
-<label>{$lang_linkle_type}</label>
+<label>Link Type</label>
 <select id="linkle_type" name="type" tabindex="3">
 </select>
 </div>
