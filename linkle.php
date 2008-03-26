@@ -97,7 +97,9 @@ function linkle_print_handler_entry($key, $info, $count){
 <label>Handler Code ($match, $text, $term, $properties)</label><br />
 <textarea name="linkle_handler_<?php echo $count?>_code" cols="70" rows="10"><?php echo htmlentities($info->get_code())?></textarea>
 <?php if(strcmp($info->get_code() ,"") != 0){?>
+<p class="submit">
 <input type="submit" name="submit_<?php echo $count?>" value = "Suggest This Link Type to The Linkle Team!"/>
+</p>
 <?php }?>
 </div>
 	<?php
