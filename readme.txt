@@ -1,5 +1,5 @@
 === linkle ===
-Contributors: Mike Lay, Michael Smit
+Contributors: mike_L, Michael Smit
 Tags: links, wikipedia, amazon,gravatar,twitter
 Requires at least: 2.3.2
 Tested up to: 2.3.2
@@ -36,4 +36,6 @@ The following types of links are currently supported by default (with more on th
 == Frequently Asked Questions ==
 none.
 == Screenshots ==
-none.
+1. Insert links with the format [ln type]keyword[/ln]
+2. Click the 'ln' icon or ctr+shift+L to open the link insert window
+3. Edit and create new link types in the Linkle options page
