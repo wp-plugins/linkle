@@ -57,7 +57,11 @@ class LinkleOptions{
 	function install(){
 		$map = array();
 		$wikipedia = LinkleLinkInfo::build("Link to specified wikipedia topic.",
-			'return \'<a href="http://www.wikipedia.org/search-redirect.php?language=en&amp;go=go&search=\'.urlencode($term).\'">\'.$text.\'</a>\';');
+			'$lang = "en";'."\n".
+			'if($properties["lang"]){'."\n".
+			'	$lang=$properties["lang"];'."\n".
+			'}'."\n".
+			'return \'<a href="http://www.wikipedia.org/search-redirect.php?language=\'.$lang.\'&amp;go=go&search=\'.urlencode($term).\'">\'.$text.\'</a>\';');
 		$map["wikipedia"] = $wikipedia->get_storage_string();
 		$amazon = LinkleLinkInfo::build("Link to amazon search result.",
 			'return \'<a href="http://www.amazon.com/s/?selected=search-alias=aps&amp;field-keywords=\'.urlencode($term).\'">\'.$text.\'</a>\';');
