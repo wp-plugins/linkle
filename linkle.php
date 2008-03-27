@@ -3,7 +3,7 @@
 Plugin Name: Linkle
 Description Quick links to a number of different web sites
 Author: Michael Smit, Mike Lay
-Version: 0.6.1
+Version: 0.7
 */
 
 include_once 'LinkleOptions.php';
